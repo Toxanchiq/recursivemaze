@@ -23,4 +23,7 @@ def generate_maze(rows, cols):
     #start to carving passages from (1,1)
     maze[1][1] = ' '
     carve_passages(1, 1)
+ #set start and exit points
+    maze[0][1] = 'S'            # start at (0,1)
+    maze[rows - 1][cols - 2] = 'E'  # exit at bottom right 
     
