@@ -76,3 +76,25 @@ def display_maze(maze):
     if maze[r][c] != 'S':
         maze[r][c] = '.'
     return None
+ def get_maze_size():
+    """
+    Ask to input a maze size between 15 and 100.
+   The valid maze size (must be an odd integer for proper maze generation).
+    """
+    while True:
+        try:
+            size_input = input("Enter the maze size (an odd integer between 15 and 100): ").strip()
+            size = int(size_input)
+            
+            if size < 15 or size > 100:
+                print("Error: Maze size must be between 15 and 100.")
+                continue
+            
+            # makesure the maze size is odd (for a proper maze structure)
+            if size % 2 == 0:
+                print("Error: Maze size must be an odd integer. Please try again.")
+                continue
+            
+            return size
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
