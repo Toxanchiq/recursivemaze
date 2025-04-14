@@ -62,3 +62,17 @@ def display_maze(maze):
     if maze[r][c] != 'S':
         maze[r][c] = '+'
     path.append((r, c))
+ #explore four directions: up, down, left, right
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    for dr, dc in directions:
+        nr, nc = r + dr, c + dc
+        if 0 <= nr < len(maze) and 0 <= nc < len(maze[0]):
+            result = solve_maze(maze, nr, nc, path)
+            if result:
+                return result
+            
+    # backtrack :) (mark cell as dead-end and remove from path)
+    path.pop()
+    if maze[r][c] != 'S':
+        maze[r][c] = '.'
+    return None
