@@ -37,4 +37,15 @@ def display_maze(maze):
     """
     for row in maze:
         print(''.join(row))
+    def solve_maze(maze, r, c, path=None):
+    """
+     DFS Recursion
     
+    Argumens:
+        maze (list[list[str]]): The maze grid
+        r (int): Current row
+        c (int): Current column
+        path (list of tuple): Accumulated path
+    """
+    if path is None:
+        path = []
