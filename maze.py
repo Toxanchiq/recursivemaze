@@ -49,3 +49,16 @@ def display_maze(maze):
     """
     if path is None:
         path = []
+# base case (exit is found)
+    if maze[r][c] == 'E':
+        path.append((r, c))
+        return path
+    
+    #check for walls or already visited cells
+    if maze[r][c] in ('#', '.', '+'):
+        return None
+    
+    # mark the current cell (except if it's the start 'S')
+    if maze[r][c] != 'S':
+        maze[r][c] = '+'
+    path.append((r, c))
