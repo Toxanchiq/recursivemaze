@@ -98,3 +98,34 @@ def display_maze(maze):
             return size
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
+         def main():
+    # ASKS maze size
+    size = get_maze_size()
+    rows = cols = size  # Create a square maze
+    
+    # Generate and display the maze
+    maze = generate_maze(rows, cols)
+    print("\nGenerated Maze:")
+    display_maze(maze)
+    
+    # makes a deep copy so that solving doesn't change the original maze
+    maze_copy = copy.deepcopy(maze)
+    
+    #solve maze starting from a starting point (0,1)
+    path = solve_maze(maze_copy, 0, 1)
+    
+    if path:
+        print("\nSolved Maze with path marked ('+'):")  # '+' is for the found path
+    else:
+        print("\nNo solution found.")
+    
+    display_maze(maze_copy)
+    
+    #the sequence of coordinates for the path
+    if path:
+        print("\nPath to exit (row, col):")
+        print(path)
+
+if __name__ == '__main__':
+    main()
+         
