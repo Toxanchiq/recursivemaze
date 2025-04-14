@@ -26,4 +26,15 @@ def generate_maze(rows, cols):
  #set start and exit points
     maze[0][1] = 'S'            # start at (0,1)
     maze[rows - 1][cols - 2] = 'E'  # exit at bottom right 
+    return maze
+
+def display_maze(maze):
+    """
+    print the maze to the console
+    
+    Arguments:
+        maze (list[list[str]]): Maze to display
+    """
+    for row in maze:
+        print(''.join(row))
     
