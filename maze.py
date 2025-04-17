@@ -6,7 +6,7 @@ import copy
 def generate_maze(rows, cols):
  
     #making maze with walls
-    maze = [['#' for _ in range(cols)] for _ in range(rows)]
+    maze = [['██' for _ in range(cols)] for _ in range(rows)]
     def carve_passages(r, c):
         #define the moves (jumping two cells) for up, left, right, down
         directions = [(0, -2), (-2, 0), (0, 2), (2, 0)]
@@ -16,12 +16,12 @@ def generate_maze(rows, cols):
             #make sure we stay within the maze and the neighbor is a wall
             if 0 < nr < rows and 0 < nc < cols and maze[nr][nc] == '██':
                 #make the passage between the two cells
-                maze[r + dr // 2][c + dc // 2] = ' '
-                maze[nr][nc] = ' '
+                maze[r + dr // 2][c + dc // 2] = '  '
+                maze[nr][nc] = '  '
                 carve_passages(nr, nc)
                 
     #start to carving passages from (1,1)
-    maze[1][1] = ' '
+    maze[1][1] = '  '
     carve_passages(1, 1)
     #set start and exit points
     maze[0][1] = 'S'            # start at (0,1)
@@ -39,7 +39,7 @@ def display_maze(maze):
         print(''.join(row))
 def solve_maze(maze, r, c, path=None):
     """
-    DFS Recursion
+     DFS Recursion
     
     Argumens:
         maze (list[list[str]]): The maze grid
@@ -55,12 +55,12 @@ def solve_maze(maze, r, c, path=None):
         return path
     
     #check for walls or already visited cells
-    if maze[r][c] in ('█', '.', '+'):
+    if maze[r][c] in ('██', '..', '++'):
         return None
     
     # mark the current cell (except if it's the start 'S')
     if maze[r][c] != 'S':
-        maze[r][c] = '+'
+        maze[r][c] = '++'
     path.append((r, c))
     #explore four directions: up, down, left, right
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
@@ -74,12 +74,12 @@ def solve_maze(maze, r, c, path=None):
     # backtrack :) (mark cell as dead-end and remove from path)
     path.pop()
     if maze[r][c] != 'S':
-        maze[r][c] = '.'
+        maze[r][c] = '..'
     return None
 def get_maze_size():
     """
     Ask to input a maze size between 15 and 100.
-    The valid maze size (must be an odd integer for proper maze generation).
+   The valid maze size (must be an odd integer for proper maze generation).
     """
     while True:
         try:
@@ -115,7 +115,7 @@ def main():
     path = solve_maze(maze_copy, 0, 1)
     
     if path:
-        print("\nSolved Maze with path marked ('+'):")  # '+' is for the found path
+        print("\nSolved Maze with path marked ('++'):")  # '+' is for the found path
     else:
         print("\nNo solution found.")
     
