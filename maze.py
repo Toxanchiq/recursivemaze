@@ -7,14 +7,14 @@ def generate_maze(rows, cols):
  
     #making maze with walls
     maze = [['#' for _ in range(cols)] for _ in range(rows)]
- def carve_passages(r, c):
+    def carve_passages(r, c):
         #define the moves (jumping two cells) for up, left, right, down
         directions = [(0, -2), (-2, 0), (0, 2), (2, 0)]
         random.shuffle(directions)
         for dr, dc in directions:
             nr, nc = r + dr, c + dc
             #make sure we stay within the maze and the neighbor is a wall
-            if 0 < nr < rows and 0 < nc < cols and maze[nr][nc] == '#':
+            if 0 < nr < rows and 0 < nc < cols and maze[nr][nc] == '██':
                 #make the passage between the two cells
                 maze[r + dr // 2][c + dc // 2] = ' '
                 maze[nr][nc] = ' '
@@ -23,7 +23,7 @@ def generate_maze(rows, cols):
     #start to carving passages from (1,1)
     maze[1][1] = ' '
     carve_passages(1, 1)
- #set start and exit points
+    #set start and exit points
     maze[0][1] = 'S'            # start at (0,1)
     maze[rows - 1][cols - 2] = 'E'  # exit at bottom right 
     return maze
@@ -37,9 +37,9 @@ def display_maze(maze):
     """
     for row in maze:
         print(''.join(row))
-    def solve_maze(maze, r, c, path=None):
+def solve_maze(maze, r, c, path=None):
     """
-     DFS Recursion
+    DFS Recursion
     
     Argumens:
         maze (list[list[str]]): The maze grid
@@ -49,20 +49,20 @@ def display_maze(maze):
     """
     if path is None:
         path = []
-# base case (exit is found)
+    # base case (exit is found)
     if maze[r][c] == 'E':
         path.append((r, c))
         return path
     
     #check for walls or already visited cells
-    if maze[r][c] in ('#', '.', '+'):
+    if maze[r][c] in ('█', '.', '+'):
         return None
     
     # mark the current cell (except if it's the start 'S')
     if maze[r][c] != 'S':
         maze[r][c] = '+'
     path.append((r, c))
- #explore four directions: up, down, left, right
+    #explore four directions: up, down, left, right
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     for dr, dc in directions:
         nr, nc = r + dr, c + dc
@@ -76,10 +76,10 @@ def display_maze(maze):
     if maze[r][c] != 'S':
         maze[r][c] = '.'
     return None
- def get_maze_size():
+def get_maze_size():
     """
     Ask to input a maze size between 15 and 100.
-   The valid maze size (must be an odd integer for proper maze generation).
+    The valid maze size (must be an odd integer for proper maze generation).
     """
     while True:
         try:
@@ -98,7 +98,7 @@ def display_maze(maze):
             return size
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
-         def main():
+def main():
     # ASKS maze size
     size = get_maze_size()
     rows = cols = size  # Create a square maze
